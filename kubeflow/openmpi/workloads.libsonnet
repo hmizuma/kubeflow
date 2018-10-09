@@ -41,7 +41,7 @@ local ROLE_WORKER = "worker";
       subdomain: service.name(params),
       restartPolicy: "Never",
       terminationGracePeriodSeconds: 30,
-      dnsPolicy: "ClusterFirst",
+      dnsPolicy: "ClusterFirstWithHostNet",
       schedulerName: params.schedulerName,
       volumes: $.volumes(params),
       containers: $.containers(params, role, podName),
