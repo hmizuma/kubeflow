@@ -49,7 +49,7 @@ local ROLE_WORKER = "worker";
       serviceAccountName: serviceaccount.name(params),
       nodeSelector: $.nodeSelector(params, role),
       securityContext: $.securityContext(params),
-      hostNetwork: if role == ROLE_WORKER then params.useHostNetwork else false,
+      hostNetwork: role == ROLE_WORKER && util.toBool(params.useHostNetwork),
     },
   },
 
