@@ -95,7 +95,7 @@ local ROLE_WORKER = "worker";
         defaultMode: 420,  // 0644
       },
     },
-  ],
+  ] + params.volumes,
 
   containers(params, role, podName):: {
     local job = {
@@ -133,7 +133,7 @@ local ROLE_WORKER = "worker";
           name: "openmpi-secrets",
           mountPath: "/kubeflow/openmpi/secrets",
         },
-      ],
+      ] + params.volumeMounts,
     },
     local controller = {
       name: "openmpi-controller",
@@ -149,7 +149,7 @@ local ROLE_WORKER = "worker";
           name: "openmpi-data",
           mountPath: "/kubeflow/openmpi/data",
         },
-      ],
+      ] + params.volumeMounts,
     },
 
     result:: if role == ROLE_MASTER then [job] else [job, controller],
